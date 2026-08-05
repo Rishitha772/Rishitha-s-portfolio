@@ -8,11 +8,12 @@ const Hero3DScene = lazy(() =>
 );
 
 const roles = [
+  "AI Explorer",
   "Aspiring Software Engineer",
+  "Product Management Enthusiast",
   "Ambitious Cloud Engineer",
   "Motivated Backend Developer",
   "Full Stack Enthusiast",
-  "AI Explorer",
 ];
 
 function TypeRoles() {
@@ -91,8 +92,7 @@ export function Hero() {
             <motion.a
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.97 }}
-              href="/resume.pdf"
-              download
+              href="/Rishitha_Khandesh_Portfolio_Resume.pdf"
               className="px-6 py-3 rounded-full font-medium glass hover:border-neon-cyan transition-colors"
             >
               Download Resume

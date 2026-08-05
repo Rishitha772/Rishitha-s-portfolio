@@ -4,7 +4,7 @@ const stats = [
   { label: "Final Year", value: "ECE" },
   { label: "Projects", value: "6" },
   { label: "Certifications", value: "5+" },
-  { label: "Focus Areas", value: "4" },
+  { label: "Focus Areas", value: "5" },
 ];
 
 export function About() {
@@ -50,7 +50,7 @@ export function About() {
             className="space-y-6"
           >
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I'm a final-year <span className="text-foreground font-medium">Electronics & Communication Engineering</span> student with a deep passion for <span className="text-foreground font-medium">Software Engineering, Cloud Computing, Backend Development, and AI</span>.
+              I'm a final-year <span className="text-foreground font-medium">Electronics & Communication Engineering</span> student with a deep passion for <span className="text-foreground font-medium">Software Engineering, Product Management, Backend Development, Cloud Computing, and AI</span>.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
              I believe growth comes from continuous learning and practical experience. Through projects, internships, and new challenges, I'm constantly improving myself while working toward a career in software engineering.</p>

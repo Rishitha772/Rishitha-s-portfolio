@@ -1,21 +1,92 @@
 import { motion } from "framer-motion";
 
 const groups = [
+   {
+  title: "Programming",
+  items: [
+    "Java",
+    "Python",
+    "JavaScript",
+    "SQL",
+    "HTML5",
+    "CSS3",
+    "OOP",
+    "Data Structures & Algorithms"
+  ],
+  color: "oklch(0.7 0.25 300)",
+},
+{
+  title: "Development",
+  items: [
+    "Spring Boot",
+    "React.js",
+    "REST APIs",
+    "MySQL",
+    "Git",
+    "GitHub",
+    "Maven",
+    "Postman",
+    "JWT Authentication",
+    "Hibernate/JPA"
+  ],
+  color: "oklch(0.65 0.22 250)",
+},
+{
+  title: "CS Fundamentals",
+  items: [
+    "Data Structures",
+    "Algorithms",
+    "Object-Oriented Programming",
+    "Operating Systems",
+    "Computer Networks",
+    "DBMS",
+    "System Design",
+    "Time & Space Complexity"
+  ],
+  color: "oklch(0.78 0.15 120)",
+},
   {
-    title: "Programming",
-    items: ["Java", "Python", "JavaScript", "SQL"],
-    color: "oklch(0.7 0.25 300)",
-  },
-  {
-    title: "Development",
-    items: ["Spring Boot", "React.js", "REST APIs", "MySQL", "Git", "GitHub"],
-    color: "oklch(0.65 0.22 250)",
-  },
-  {
-    title: "Cloud, AI & Systems",
-    items: ["AWS", "Operating System", "Computer Networks", "System Design", "Artificial Intelligence", "Machine Learning"],
-    color: "oklch(0.82 0.16 200)",
-  },
+  title: "Product Management",
+  items: [
+    "Product Strategy",
+    "Roadmapping",
+    "User Research",
+    "Market Research",
+    "Wireframing",
+    "Agile & Scrum",
+    "Product Analytics",
+    "A/B Testing"
+  ],
+  color: "oklch(0.72 0.20 30)",
+},
+{
+  title: "Cloud Computing",
+  items: [
+    "AWS",
+    "Amazon EC2",
+    "Amazon S3",
+    "AWS Lambda",
+    "Amazon RDS",
+    "IAM",
+    "VPC",
+    "Cloud Fundamentals"
+  ],
+  color: "oklch(0.75 0.18 220)",
+},
+{
+  title: "Artificial Intelligence",
+  items: [
+    "Generative AI",
+    "Prompt Engineering",
+    "Retrieval-Augmented Generation (RAG)",
+    "Large Language Models (LLMs)",
+    "NLP Basics",
+    "AI Chatbots",
+    "OpenAI APIs",
+    "Hugging Face"
+  ],
+  color: "oklch(0.78 0.18 150)",
+},
 ];
 
 export function Skills() {
