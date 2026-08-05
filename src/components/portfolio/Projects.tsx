@@ -16,7 +16,6 @@ import { useRef, MouseEvent } from "react";
     gradient:
       "linear-gradient(135deg, oklch(0.65 0.22 250), oklch(0.7 0.25 300))",
     github: "https://github.com/Rishitha772/Lumora_AI",
-    demo: "https://YOUR-LUMORA-AI-DEMO.netlify.app",
   },
 
   {
