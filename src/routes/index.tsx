@@ -15,7 +15,7 @@ import { Loader } from "@/components/portfolio/Loader";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Rishitha Khandesh — Software Engineer & Cloud Developer" },
+      { title: "Rishitha Khandesh's Portfolio" },
       { name: "description", content: "Portfolio of Rishitha Khandesh — Final-year ECE student building scalable software, cloud-native backends, and AI-driven products." },
       { property: "og:title", content: "Rishitha Khandesh — Software Engineer Portfolio" },
       { property: "og:description", content: "Aspiring Software Engineer, Cloud Engineer, Backend Developer & Full Stack Enthusiast." },
