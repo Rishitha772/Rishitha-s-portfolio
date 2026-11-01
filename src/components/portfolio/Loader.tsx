@@ -21,9 +21,9 @@ export function Loader() {
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
               className="w-24 h-24 rounded-full border-2 border-transparent"
               style={{
-                borderTopColor: "oklch(0.7 0.25 300)",
-                borderRightColor: "oklch(0.82 0.16 200)",
-                boxShadow: "0 0 40px oklch(0.7 0.25 300 / 0.5)",
+                borderTopColor: "#facc15",
+                borderRightColor: "#f59e0b",
+                boxShadow: "0 0 40px rgba(250, 204, 21, 0.6)",
               }}
             />
             <motion.div

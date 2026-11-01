@@ -13,7 +13,7 @@ export function ParticleBackground() {
     let height = (canvas.height = window.innerHeight);
 
     const particles: { x: number; y: number; vx: number; vy: number; r: number; c: string }[] = [];
-    const colors = ["#a855f7", "#6366f1", "#22d3ee", "#8b5cf6"];
+    const colors = ["#a855f7", "#6366f1", "#22d3ee", "#8b5cf6", "#facc15", "#fbbf24"];
     const count = Math.min(80, Math.floor((width * height) / 20000));
 
     for (let i = 0; i < count; i++) {

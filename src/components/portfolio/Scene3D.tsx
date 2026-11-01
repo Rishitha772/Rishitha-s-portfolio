@@ -15,14 +15,14 @@ function AnimatedSphere() {
     <Float speed={1.2} rotationIntensity={0.6} floatIntensity={1.2}>
       <Sphere ref={meshRef} args={[1.6, 32, 32]}>
         <MeshDistortMaterial
-          color="#a855f7"
+          color="#facc15"
           attach="material"
           distort={0.35}
           speed={1.5}
           roughness={0.2}
           metalness={0.8}
-          emissive="#6366f1"
-          emissiveIntensity={0.4}
+          emissive="#f59e0b"
+          emissiveIntensity={0.5}
         />
       </Sphere>
     </Float>
@@ -46,9 +46,9 @@ function OrbitingSpheres() {
             <mesh position={[Math.cos(angle) * radius, Math.sin(angle) * 0.5, Math.sin(angle) * radius]}>
               <sphereGeometry args={[0.15, 12, 12]} />
               <meshStandardMaterial
-                color={i % 2 === 0 ? "#22d3ee" : "#a855f7"}
-                emissive={i % 2 === 0 ? "#22d3ee" : "#a855f7"}
-                emissiveIntensity={1.5}
+                color={i % 2 === 0 ? "#fde047" : "#f59e0b"}
+                emissive={i % 2 === 0 ? "#fde047" : "#f59e0b"}
+                emissiveIntensity={1.8}
               />
             </mesh>
           </Float>

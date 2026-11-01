@@ -31,7 +31,7 @@ export function CustomCursor() {
         className="fixed top-0 left-0 pointer-events-none rounded-full border-2 hidden md:block"
         animate={{ x: pos.x - 20, y: pos.y - 20, scale: hover ? 1.6 : 1 }}
         transition={{ type: "spring", stiffness: 200, damping: 20 }}
-        style={{ width: 40, height: 40, borderColor: "oklch(0.7 0.25 300)", zIndex: 9999 }}
+        style={{ width: 40, height: 40, borderColor: "#facc15", boxShadow: "0 0 15px rgba(250, 204, 21, 0.4)", zIndex: 9999 }}
       />
     </>
   );

@@ -1,84 +1,128 @@
 import { motion } from "framer-motion";
+import { Sparkles, Send, Mail, Linkedin, Github, FileText, ArrowRight } from "lucide-react";
 
 const socials = [
   {
     label: "LinkedIn",
+    subtext: "Connect professionally",
     href: "https://www.linkedin.com/in/rishitha-khandesh-b766b330a/",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.27 2.38 4.27 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
-    ),
+    icon: Linkedin,
   },
   {
     label: "GitHub",
+    subtext: "Explore repositories",
     href: "https://github.com/Rishitha772",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
-    ),
+    icon: Github,
   },
   {
     label: "Email",
+    subtext: "rishithakhandesh@gmail.com",
     href: "https://mail.google.com/mail/?view=cm&fs=1&to=rishithakhandesh@gmail.com",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6L12 13 2 6"/></svg>
-    ),
+    icon: Mail,
   },
   {
     label: "Resume",
+    subtext: "Download PDF",
     href: "/Rishitha_Khandesh_Portfolio_Resume.pdf",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
-    ),
+    icon: FileText,
   },
 ];
 
 export function Contact() {
   return (
-    <section id="contact" className="relative py-32 px-6">
+    <section id="contact" className="relative py-32 px-6 overflow-hidden">
+      {/* Ambient warm golden radial lighting */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none -z-10"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(250, 204, 21, 0.14) 0%, rgba(245, 158, 11, 0.06) 50%, transparent 70%)",
+          filter: "blur(90px)",
+        }}
+      />
+
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <p className="text-sm tracking-[0.3em] text-neon-cyan uppercase mb-3">Get in touch</p>
-          <h2 className="font-[Orbitron] text-4xl md:text-6xl font-bold mb-6">
-            Let's build <span className="text-gradient">something great</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-[0.25em] uppercase text-yellow-300 bg-yellow-400/10 border border-yellow-400/35 shadow-[0_0_20px_rgba(250,204,21,0.25)] mb-4">
+            <Send className="w-3.5 h-3.5 text-yellow-400 animate-pulse" />
+            <span>Get in Touch</span>
+          </div>
+
+          <h2 className="font-[Orbitron] text-4xl md:text-6xl font-extrabold mb-6 tracking-tight">
+            Let's build{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 drop-shadow-[0_0_35px_rgba(250,204,21,0.55)]">
+              something great
+            </span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-12">
-             Open to exciting opportunities in Software Engineering, Product Management, Full Stack Development, Backend Development, Cloud Computing, and AI.    Reach out — I respond fast.
+          <p className="text-base md:text-lg text-foreground/85 max-w-2xl mx-auto mb-12 leading-relaxed">
+            Open to exciting full-time opportunities and internships in Software Engineering, Backend Architecture, Cloud Computing, and AI Product Development. Feel free to connect or drop a message!
           </p>
         </motion.div>
 
+        {/* Social Cards Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {socials.map((s, i) => (
-            <motion.a
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ y: -8, scale: 1.05 }}
-              className="glass rounded-2xl p-6 flex flex-col items-center gap-3 hover:border-neon-purple transition-colors animate-float"
-              style={{ animationDelay: `${i * 0.3}s` }}
-            >
-              <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: "var(--gradient-hero)" }}>
-                <span className="text-primary-foreground">{s.icon}</span>
-              </div>
-              <span className="text-sm font-medium">{s.label}</span>
-            </motion.a>
-          ))}
+          {socials.map((s, i) => {
+            const Icon = s.icon;
+            return (
+              <motion.a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ y: -8, scale: 1.03 }}
+                className="relative rounded-2xl p-6 flex flex-col items-center gap-3 border border-yellow-500/25 bg-gradient-to-b from-yellow-950/20 via-stone-900/75 to-yellow-950/35 backdrop-blur-xl shadow-[0_0_25px_rgba(250,204,21,0.1)] hover:border-yellow-400 hover:shadow-[0_0_35px_rgba(250,204,21,0.3)] transition-all duration-300 group"
+              >
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-tr from-yellow-400 via-amber-500 to-yellow-300 text-stone-950 shadow-[0_0_20px_rgba(250,204,21,0.4)] group-hover:scale-110 transition-transform">
+                  <Icon className="w-7 h-7" />
+                </div>
+                <div>
+                  <span className="text-sm font-bold text-foreground group-hover:text-yellow-300 transition-colors block">
+                    {s.label}
+                  </span>
+                  <span className="text-[11px] text-muted-foreground block mt-0.5 truncate max-w-[130px]">
+                    {s.subtext}
+                  </span>
+                </div>
+              </motion.a>
+            );
+          })}
         </div>
 
+        {/* Direct Email Call to Action */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12"
+        >
+          <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=rishithakhandesh@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-stone-950 bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 hover:from-yellow-200 hover:to-amber-400 shadow-[0_0_30px_rgba(250,204,21,0.5)] hover:shadow-[0_0_45px_rgba(250,204,21,0.7)] transition-all duration-300 hover:scale-105"
+          >
+            <Mail className="w-5 h-5" />
+            <span>Send Email Directly</span>
+            <ArrowRight className="w-4 h-4 ml-1" />
+          </a>
+        </motion.div>
+
+        {/* Footer */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-20 pt-8 border-t border-border text-xs text-muted-foreground"
+          className="mt-20 pt-8 border-t border-yellow-500/20 text-xs text-yellow-100/60 font-mono"
         >
-          © {new Date().getFullYear()} Rishitha Khandesh. Designed & built with passion.
+          © {new Date().getFullYear()} Rishitha Khandesh • Crafted with precision, purpose & passion.
         </motion.div>
       </div>
     </section>
