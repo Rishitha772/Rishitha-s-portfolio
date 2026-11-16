@@ -90,6 +90,38 @@ const flagshipProjects: Project[] = [
 
 const secondaryProjects: Project[] = [
   {
+    id: "ai-calling-agent",
+    name: "AI Calling Agent",
+    category: "AI Calling Agent",
+    tagline: "Handles the calls for the Software Companies",
+    description:
+      "Built Chloe, an AI-powered calling agent that automates conversations, engages leads, and streamlines follow-ups through intelligent voice interactions.",
+    technologies: ["Python", "FastAPI", "Ollama", "Llama 3.2", "SQLite", "Uvicorn"],
+    highlights: [
+      "Chloe is an AI-powered calling agent designed to automate lead conversations and follow-ups.",
+      "Built using Python and FastAPI, with Ollama-powered LLM capabilities for intelligent responses.",
+      "Integrates REST APIs and SQLite to manage lead information and streamline communication.",
+    ],
+    metrics: "Google Gemini API Powered",
+    icon: Bot,
+  },
+  {
+    id: "vuln-detect-pro",
+    name: "Vuln Detect Pro",
+    category: "AI-powered Cyber Security Platform",
+    tagline: "Auditing and Enhancing codebase Security",
+    description:
+      "VulnDetect Pro – AI-Powered Website Vulnerability Detection & Security Analysis Platform",
+    technologies: ["Python", "Django", "Gemini AI", "RAG", "FAISS", "OWASP", "HTML", "CSS", "JavaScript"],
+    highlights: [
+      "Developed an intelligent security platform to scan websites and identify potential vulnerabilities.",
+      "Integrated Gemini AI, RAG, and FAISS vector search for contextual vulnerability analysis and risk prioritization.",
+      "Implemented port scanning, technology fingerprinting, OWASP mapping, and automated security reports with actionable remediation guidance.",
+    ],
+    metrics: "Google Gemini API Powered",
+    icon: Bot,
+  },
+  {
     id: "lumora-ai",
     name: "Lumora AI",
     category: "AI Document Intelligence",
@@ -171,175 +203,173 @@ export function Projects() {
                   transition={{ duration: 0.6, delay: 0.1 }}
                   className="group rounded-2xl bg-[#432A37] border border-[#624451] hover:border-[#B77983] transition-all duration-300 overflow-hidden shadow-xl"
                 >
-                <div className="grid lg:grid-cols-12 gap-8 items-stretch">
-                  {/* Left / Info Column (7 cols) */}
-                  <div
-                    className={`lg:col-span-7 p-8 md:p-10 flex flex-col justify-between ${
-                      isReversed ? "lg:order-2" : "lg:order-1"
-                    }`}
-                  >
-                    <div>
-                      {/* Category & Status Bar */}
-                      <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-                        <div className="flex items-center gap-2">
-                          <span className="font-mono text-xs text-[#B77983] tracking-wider uppercase">
-                            0{index + 1} // {p.category}
-                          </span>
+                  <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+                    {/* Left / Info Column (7 cols) */}
+                    <div
+                      className={`lg:col-span-7 p-8 md:p-10 flex flex-col justify-between ${isReversed ? "lg:order-2" : "lg:order-1"
+                        }`}
+                    >
+                      <div>
+                        {/* Category & Status Bar */}
+                        <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono text-xs text-[#B77983] tracking-wider uppercase">
+                              0{index + 1} // {p.category}
+                            </span>
+                          </div>
+                          {p.metrics && (
+                            <span className="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-[#351E2B] text-[#E8D5C4] border border-[#624451]">
+                              {p.metrics}
+                            </span>
+                          )}
                         </div>
-                        {p.metrics && (
-                          <span className="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-[#351E2B] text-[#E8D5C4] border border-[#624451]">
-                            {p.metrics}
-                          </span>
-                        )}
-                      </div>
 
-                      {/* Title */}
-                      <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-normal text-[#FAF5EF] mb-2 group-hover:text-[#E8D5C4] transition-colors">
-                        {p.name}
-                      </h3>
+                        {/* Title */}
+                        <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-normal text-[#FAF5EF] mb-2 group-hover:text-[#E8D5C4] transition-colors">
+                          {p.name}
+                        </h3>
 
-                      <p className="font-mono text-xs text-[#D5C0C3] mb-4 font-normal tracking-wide">
-                        {p.tagline}
-                      </p>
-
-                      <p className="text-sm md:text-base text-[#D5C0C3] leading-relaxed mb-6 font-normal">
-                        {p.description}
-                      </p>
-
-                      {/* Technical Highlights list */}
-                      <div className="space-y-2 mb-8 pt-4 border-t border-[#624451]/60">
-                        <p className="font-mono text-[11px] tracking-wider text-[#B77983] uppercase">
-                          ARCHITECTURAL HIGHLIGHTS
+                        <p className="font-mono text-xs text-[#D5C0C3] mb-4 font-normal tracking-wide">
+                          {p.tagline}
                         </p>
-                        <ul className="space-y-1.5">
-                          {p.highlights.map((h, i) => (
-                            <li
-                              key={i}
-                              className="text-xs text-[#FAF5EF]/90 flex items-start gap-2"
+
+                        <p className="text-sm md:text-base text-[#D5C0C3] leading-relaxed mb-6 font-normal">
+                          {p.description}
+                        </p>
+
+                        {/* Technical Highlights list */}
+                        <div className="space-y-2 mb-8 pt-4 border-t border-[#624451]/60">
+                          <p className="font-mono text-[11px] tracking-wider text-[#B77983] uppercase">
+                            ARCHITECTURAL HIGHLIGHTS
+                          </p>
+                          <ul className="space-y-1.5">
+                            {p.highlights.map((h, i) => (
+                              <li
+                                key={i}
+                                className="text-xs text-[#FAF5EF]/90 flex items-start gap-2"
+                              >
+                                <span className="inline-block w-1 h-1 rounded-full bg-[#E8D5C4] mt-1.5 flex-shrink-0" />
+                                <span>{h}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      {/* Tech Badges & Actions */}
+                      <div>
+                        {/* Tech stack pills */}
+                        <div className="flex flex-wrap gap-2 mb-6">
+                          {p.technologies.map((t) => (
+                            <span
+                              key={t}
+                              className="font-mono text-[11px] px-2.5 py-1 rounded bg-[#351E2B] text-[#E8D5C4] border border-[#624451]"
                             >
-                              <span className="inline-block w-1 h-1 rounded-full bg-[#E8D5C4] mt-1.5 flex-shrink-0" />
-                              <span>{h}</span>
-                            </li>
+                              {t}
+                            </span>
                           ))}
-                        </ul>
+                        </div>
+
+                        {/* Action Links */}
+                        <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-[#624451]/60">
+                          {p.githubUrl && (
+                            <a
+                              href={p.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium tracking-wide border border-[#624451] bg-[#351E2B] text-[#FAF5EF] hover:border-[#B77983] hover:text-[#E8D5C4] transition-all"
+                            >
+                              <Github className="w-3.5 h-3.5 text-[#B77983]" />
+                              <span>Source Code</span>
+                            </a>
+                          )}
+
+                          {p.liveUrl && (
+                            <a
+                              href={p.liveUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold tracking-wide bg-[#E8D5C4] text-[#351E2B] hover:bg-[#FAF5EF] transition-all"
+                            >
+                              <span>Live Demo</span>
+                              <ExternalLink className="w-3.5 h-3.5 text-[#351E2B]" />
+                            </a>
+                          )}
+
+                          {p.caseStudyUrl && (
+                            <a
+                              href={p.caseStudyUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium tracking-wide border border-[#624451] bg-[#713B50]/30 text-[#FAF5EF] hover:border-[#B77983] hover:text-[#E8D5C4] transition-all"
+                            >
+                              <FileText className="w-3.5 h-3.5 text-[#B77983]" />
+                              <span>Case Study (PDF)</span>
+                            </a>
+                          )}
+                        </div>
                       </div>
                     </div>
 
-                    {/* Tech Badges & Actions */}
-                    <div>
-                      {/* Tech stack pills */}
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {p.technologies.map((t) => (
-                          <span
-                            key={t}
-                            className="font-mono text-[11px] px-2.5 py-1 rounded bg-[#351E2B] text-[#E8D5C4] border border-[#624451]"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Action Links */}
-                      <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-[#624451]/60">
-                        {p.githubUrl && (
-                          <a
-                            href={p.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium tracking-wide border border-[#624451] bg-[#351E2B] text-[#FAF5EF] hover:border-[#B77983] hover:text-[#E8D5C4] transition-all"
-                          >
-                            <Github className="w-3.5 h-3.5 text-[#B77983]" />
-                            <span>Source Code</span>
-                          </a>
-                        )}
-
-                        {p.liveUrl && (
-                          <a
-                            href={p.liveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold tracking-wide bg-[#E8D5C4] text-[#351E2B] hover:bg-[#FAF5EF] transition-all"
-                          >
-                            <span>Live Demo</span>
-                            <ExternalLink className="w-3.5 h-3.5 text-[#351E2B]" />
-                          </a>
-                        )}
-
-                        {p.caseStudyUrl && (
-                          <a
-                            href={p.caseStudyUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium tracking-wide border border-[#624451] bg-[#713B50]/30 text-[#FAF5EF] hover:border-[#B77983] hover:text-[#E8D5C4] transition-all"
-                          >
-                            <FileText className="w-3.5 h-3.5 text-[#B77983]" />
-                            <span>Case Study (PDF)</span>
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right / Visual Blueprint Column (5 cols) */}
-                  <div
-                    className={`lg:col-span-5 bg-[#351E2B] p-8 md:p-10 flex flex-col justify-center border-t lg:border-t-0 ${
-                      isReversed
+                    {/* Right / Visual Blueprint Column (5 cols) */}
+                    <div
+                      className={`lg:col-span-5 bg-[#351E2B] p-8 md:p-10 flex flex-col justify-center border-t lg:border-t-0 ${isReversed
                         ? "lg:border-r lg:border-[#624451] lg:order-1"
                         : "lg:border-l lg:border-[#624451] lg:order-2"
-                    }`}
-                  >
-                    {/* Architectural Blueprint Card */}
-                    <div className="relative rounded-xl border border-[#624451] bg-[#432A37]/60 p-6 space-y-4">
-                      <div className="flex items-center justify-between pb-3 border-b border-[#624451]/60">
-                        <div className="flex items-center gap-2 text-xs font-mono text-[#D5C0C3]">
-                          <Icon className="w-4 h-4 text-[#E8D5C4]" />
-                          <span>SYSTEM ARCHITECTURE</span>
+                        }`}
+                    >
+                      {/* Architectural Blueprint Card */}
+                      <div className="relative rounded-xl border border-[#624451] bg-[#432A37]/60 p-6 space-y-4">
+                        <div className="flex items-center justify-between pb-3 border-b border-[#624451]/60">
+                          <div className="flex items-center gap-2 text-xs font-mono text-[#D5C0C3]">
+                            <Icon className="w-4 h-4 text-[#E8D5C4]" />
+                            <span>SYSTEM ARCHITECTURE</span>
+                          </div>
+                          <span className="w-2 h-2 rounded-full bg-[#B77983]" />
                         </div>
-                        <span className="w-2 h-2 rounded-full bg-[#B77983]" />
-                      </div>
 
-                      {/* Schematic Code or Structural Representation */}
-                      <div className="font-mono text-[11px] text-[#D5C0C3] space-y-2 leading-relaxed bg-[#351E2B] p-4 rounded-lg border border-[#624451]">
-                        {p.id === "whatchat" && (
-                          <>
-                            <div className="text-[#B77983]">// REST + Real-Time Engine</div>
-                            <div>Client: React.js (Stateful Chat UI)</div>
-                            <div>Server: Spring Boot 3.x REST Controller</div>
-                            <div>Database: MySQL 8.0 (Normalized Relations)</div>
-                            <div className="text-[#E8D5C4]">Feature: Personal Memory Space Vault</div>
-                          </>
-                        )}
-                        {p.id === "hiresphere" && (
-                          <>
-                            <div className="text-[#B77983]">// Dual-Persona Workflows</div>
-                            <div>Candidate: Skill Sandbox & Task Runner</div>
-                            <div>Recruiter: Objective Assessment Metrics</div>
-                            <div>Auth: JWT Token Bearer Interceptor</div>
-                            <div className="text-[#E8D5C4]">Storage: MySQL Persistence Layer</div>
-                          </>
-                        )}
-                        {p.id === "in-memory-cache" && (
-                          <>
-                            <div className="text-[#B77983]">// Core Data Structures</div>
-                            <div>Store: HashMap&lt;K, Node&lt;K, V&gt;&gt;</div>
-                            <div>Eviction: DoublyLinkedList (Head/Tail O(1))</div>
-                            <div>Policy: Least Recently Used (LRU)</div>
-                            <div className="text-[#E8D5C4]">Cleaner: Daemon Thread with TTL Expiry</div>
-                          </>
-                        )}
-                      </div>
+                        {/* Schematic Code or Structural Representation */}
+                        <div className="font-mono text-[11px] text-[#D5C0C3] space-y-2 leading-relaxed bg-[#351E2B] p-4 rounded-lg border border-[#624451]">
+                          {p.id === "whatchat" && (
+                            <>
+                              <div className="text-[#B77983]">// REST + Real-Time Engine</div>
+                              <div>Client: React.js (Stateful Chat UI)</div>
+                              <div>Server: Spring Boot 3.x REST Controller</div>
+                              <div>Database: MySQL 8.0 (Normalized Relations)</div>
+                              <div className="text-[#E8D5C4]">Feature: Personal Memory Space Vault</div>
+                            </>
+                          )}
+                          {p.id === "hiresphere" && (
+                            <>
+                              <div className="text-[#B77983]">// Dual-Persona Workflows</div>
+                              <div>Candidate: Skill Sandbox & Task Runner</div>
+                              <div>Recruiter: Objective Assessment Metrics</div>
+                              <div>Auth: JWT Token Bearer Interceptor</div>
+                              <div className="text-[#E8D5C4]">Storage: MySQL Persistence Layer</div>
+                            </>
+                          )}
+                          {p.id === "in-memory-cache" && (
+                            <>
+                              <div className="text-[#B77983]">// Core Data Structures</div>
+                              <div>Store: HashMap&lt;K, Node&lt;K, V&gt;&gt;</div>
+                              <div>Eviction: DoublyLinkedList (Head/Tail O(1))</div>
+                              <div>Policy: Least Recently Used (LRU)</div>
+                              <div className="text-[#E8D5C4]">Cleaner: Daemon Thread with TTL Expiry</div>
+                            </>
+                          )}
+                        </div>
 
-                      <div className="pt-2 flex items-center justify-between text-[10px] font-mono text-[#B77983]">
-                        <span>RELIABLE • SCALABLE • CLEAN</span>
-                        <span>{p.technologies.slice(0, 2).join(" • ")}</span>
+                        <div className="pt-2 flex items-center justify-between text-[10px] font-mono text-[#B77983]">
+                          <span>RELIABLE • SCALABLE • CLEAN</span>
+                          <span>{p.technologies.slice(0, 2).join(" • ")}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </motion.article>
-            </Card3D>
-          );
-        })}
+                </motion.article>
+              </Card3D>
+            );
+          })}
         </div>
 
         {/* Secondary Projects Section Toggle */}

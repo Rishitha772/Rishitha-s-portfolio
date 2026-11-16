@@ -208,7 +208,7 @@ export function Experience() {
                 </span>
                 <span className="text-[#DDCFBF]">•</span>
                 <span className="font-mono text-xs text-[#351E2B] font-semibold">
-                  2022 — 2026
+                  2023 - 2027
                 </span>
               </div>
 
@@ -228,7 +228,7 @@ export function Experience() {
 
               <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
                 <div className="px-3.5 py-1.5 rounded-lg bg-[#FAF5EF] border border-[#DDCFBF] text-[#351E2B]">
-                  CGPA: <strong className="text-[#713B50] font-bold">8.6 / 10.0</strong>
+                  CGPA: <strong className="text-[#713B50] font-bold">8.5 / 10.0</strong>
                 </div>
                 <div className="px-3.5 py-1.5 rounded-lg bg-[#FAF5EF] border border-[#DDCFBF] text-[#624451]">
                   Location: Hyderabad, India
