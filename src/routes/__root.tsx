@@ -104,12 +104,12 @@ export const Route =
           content: "width=device-width, initial-scale=1",
         },
         {
-          title: "Rishitha Khandesh | Software Engineer",
+          title: "Rishitha Khandesh | Software Developer",
         },
         {
           name: "description",
           content:
-            "Portfolio of Rishitha Khandesh showcasing Software Engineering, AI, Backend Development, Cloud Computing, and Product Management projects.",
+            "Portfolio of Rishitha Khandesh — Software Developer building reliable, scalable, and meaningful software solutions using Java, backend architectures, and modern web development.",
         },
         {
           name: "author",
@@ -117,12 +117,12 @@ export const Route =
         },
         {
           property: "og:title",
-          content: "Rishitha Khandesh | Software Engineer",
+          content: "Rishitha Khandesh | Software Developer",
         },
         {
           property: "og:description",
           content:
-            "Software Engineer specializing in AI, Cloud Computing, Backend Development, and Product Management.",
+            "Software Developer passionate about building reliable, scalable, and meaningful software solutions with Java, Spring Boot, and modern web engineering.",
         },
         {
           property: "og:type",
@@ -130,7 +130,7 @@ export const Route =
         },
         {
           property: "og:image",
-          content: "/og-image.png",
+          content: "/rishitha.jpg",
         },
         {
           name: "twitter:card",
@@ -138,27 +138,27 @@ export const Route =
         },
         {
           name: "twitter:title",
-          content: "Rishitha Khandesh | Software Engineer",
+          content: "Rishitha Khandesh | Software Developer",
         },
         {
           name: "twitter:description",
           content:
-            "Software Engineer specializing in AI, Cloud Computing, Backend Development, and Product Management.",
+            "Software Developer passionate about building reliable, scalable, and meaningful software solutions.",
         },
         {
           name: "twitter:image",
-          content: "/og-image.png",
+          content: "/rishitha.jpg",
         },
       ],
 
       links: [
         {
           rel: "icon",
-          href: "\rishitha.ico",
+          href: "/rishitha.jpg",
         },
         {
           rel: "apple-touch-icon",
-          href: "/favicon.ico",
+          href: "/rishitha.jpg",
         },
         {
           rel: "stylesheet",
@@ -175,7 +175,7 @@ export const Route =
         },
         {
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&display=swap",
+          href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap",
         },
       ],
     }),

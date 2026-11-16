@@ -1,243 +1,439 @@
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import { useRef, MouseEvent } from "react";
-import { Sparkles, ExternalLink, Github, FolderGit2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import {
+  ArrowUpRight,
+  ExternalLink,
+  FileText,
+  Github,
+  Layers,
+  MessageSquare,
+  Briefcase,
+  Database,
+  Bot,
+  Zap,
+} from "lucide-react";
+import { Card3D } from "./Scene3D";
 
-const projects = [
+interface Project {
+  id: string;
+  name: string;
+  category: string;
+  tagline: string;
+  description: string;
+  technologies: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  caseStudyUrl?: string;
+  highlights: string[];
+  metrics?: string;
+  icon: typeof MessageSquare;
+}
+
+const flagshipProjects: Project[] = [
   {
-    title: "Lumora AI",
-    desc: "An AI-powered PDF chatbot that extracts text from uploaded documents and answers user questions using Google Gemini and RAG.",
-    tags: [
-      "Java",
-      "Spring Boot",
-      "React.js",
-      "Google Gemini API",
-      "Apache PDFBox",
-      "Maven",
+    id: "whatchat",
+    name: "WhatChat",
+    category: "Real-Time Chat Application",
+    tagline: "Personal & Group Communication with Curated Memory Spaces",
+    description:
+      "A chat application designed for personal and group conversations, with a dedicated personal space to save meaningful messages, media, and memories. Features persistent message delivery, secure relational data mapping, and intuitive conversation management.",
+    technologies: ["Java", "Spring Boot", "React", "MySQL"],
+    githubUrl: "https://github.com/Rishitha772",
+    highlights: [
+      "Dedicated personal storage space for curated messages & notes",
+      "Real-time one-to-one and group conversation flows",
+      "Normalized relational schema for users, messages, and threads",
+      "Modular Spring Boot REST endpoints with input validation",
     ],
-    gradient: "linear-gradient(135deg, #f59e0b, #d97706, #78350f)",
-    github: "https://github.com/Rishitha772/Lumora_AI",
+    metrics: "Full-Stack Architecture",
+    icon: MessageSquare,
   },
   {
-    title: "HireSphere",
-    desc: "Task-driven hiring platform for freshers that replaces resumes with real proof-of-skill challenges and dynamic evaluation.",
-    tags: ["React", "Spring Boot", "MySQL", "JWT Auth", "REST APIs"],
-    gradient: "linear-gradient(135deg, #eab308, #ca8a04, #854d0e)",
-    github: "https://github.com/Rishitha772/hiresphere",
-    demo: "https://hire-sphere-0d645.netlify.app",
-  },
-  {
-    title: "HireSphere Product Case Study",
-    desc: "End-to-end design and strategy case study of HireSphere: identifying friction, MVP scoping, user journey mapping, and metric tracking.",
-    tags: [
-      "Product Management",
-      "Case Study",
-      "User Research",
-      "Product Strategy",
+    id: "hiresphere",
+    name: "HireSphere",
+    category: "Task-Based Hiring Platform",
+    tagline: "Replacing Resumes with Practical Skill Challenges",
+    description:
+      "A task-based recruitment platform designed to connect recruiters and candidates through practical skill evaluation rather than relying exclusively on resumes. Streamlines hiring by evaluating measurable project submissions and automated task benchmarks.",
+    technologies: ["Java", "Spring Boot", "React", "MySQL"],
+    githubUrl: "https://github.com/Rishitha772/hiresphere",
+    liveUrl: "https://hire-sphere-0d645.netlify.app",
+    caseStudyUrl: "/HireSphere_Case_Study.pdf",
+    highlights: [
+      "Task submission and peer/recruiter grading pipeline",
+      "Dual portal views tailored for candidates and hiring managers",
+      "Secure JWT-based authentication and role-based access control",
+      "Comprehensive product discovery and strategy case study completed",
     ],
-    gradient: "linear-gradient(135deg, #fbbf24, #d97706, #92400e)",
-    demo: "/HireSphere_Case_Study.pdf",
+    metrics: "Live on Netlify • Case Study Available",
+    icon: Briefcase,
   },
   {
-    title: "Java LRU Cache",
-    desc: "Production-grade LRU cache with O(1) operations, TTL eviction policies, thread-safe concurrency, and background cleanup threads.",
-    tags: ["Java", "Concurrency", "DSA", "System Design"],
-    gradient: "linear-gradient(135deg, #facc15, #f59e0b, #b45309)",
-    github: "https://github.com/Rishitha772/LRU-Java-Cache-Project",
-  },
-  {
-    title: "Distributed Rate Limiter",
-    desc: "Scalable rate limiter to govern and throttle API request traffic, ensuring high availability, system stability, and DOS prevention.",
-    tags: ["Java", "Spring Boot", "REST APIs", "Redis Concept"],
-    gradient: "linear-gradient(135deg, #f59e0b, #b45309, #78350f)",
-    github: "https://github.com/Rishitha772/LRU-Java-Cache-Project",
-  },
-  {
-    title: "TerraVolt",
-    desc: "AI-powered sustainability and energy prediction platform that forecasts industrial energy consumption and emissions. Selected as Top 30 by AICTE 1M1B.",
-    tags: ["Python", "AI/ML", "REST API", "Sustainability"],
-    gradient: "linear-gradient(135deg, #eab308, #d97706, #78350f)",
-    github: "https://github.com/Rishitha772/TerraVolt",
-    demo: "https://terra-volt-seven.vercel.app",
+    id: "in-memory-cache",
+    name: "In-Memory Cache System",
+    category: "Backend Engineering",
+    tagline: "High-Throughput LRU Eviction & TTL Expiration Engine",
+    description:
+      "An in-memory caching system implementing LRU (Least Recently Used) eviction and TTL-based expiration to demonstrate core backend engineering concepts. Designed with thread-safe concurrency controls, doubly-linked hash map architecture, and background memory cleanup routines.",
+    technologies: ["Java", "Data Structures", "Algorithms"],
+    githubUrl: "https://github.com/Rishitha772/LRU-Java-Cache-Project",
+    highlights: [
+      "O(1) time complexity for both read (GET) and write (PUT) operations",
+      "Doubly linked list coupled with Hash Map for optimal eviction order",
+      "TTL (Time-To-Live) background reaper daemon for passive cleanup",
+      "Thread safety guarantees under concurrent multi-threaded workloads",
+    ],
+    metrics: "O(1) Time Complexity • Concurrency Safe",
+    icon: Database,
   },
 ];
 
-function TiltCard({
-  p,
-  i,
-}: {
-  p: (typeof projects)[number];
-  i: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const rx = useTransform(y, [-50, 50], [10, -10]);
-  const ry = useTransform(x, [-50, 50], [-10, 10]);
-
-  const onMove = (e: MouseEvent) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return;
-    x.set(e.clientX - rect.left - rect.width / 2);
-    y.set(e.clientY - rect.top - rect.height / 2);
-  };
-
-  const onLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: i * 0.1 }}
-      style={{
-        rotateX: rx,
-        rotateY: ry,
-        transformStyle: "preserve-3d",
-      }}
-      className="relative rounded-3xl p-8 border border-yellow-500/25 bg-gradient-to-b from-yellow-950/25 via-stone-900/75 to-yellow-950/35 backdrop-blur-2xl shadow-[0_0_35px_rgba(250,204,21,0.12)] hover:border-yellow-400/80 hover:shadow-[0_0_45px_rgba(250,204,21,0.25)] transition-all duration-300 group cursor-default overflow-hidden"
-    >
-      <div
-        className="absolute -top-32 -right-32 w-64 h-64 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity"
-        style={{ background: p.gradient }}
-      />
-
-      <div className="relative" style={{ transform: "translateZ(40px)" }}>
-        {/* Project Visual Banner */}
-        <div
-          className="h-44 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-yellow-400/30 shadow-[0_0_20px_rgba(250,204,21,0.15)]"
-          style={{ background: p.gradient }}
-        >
-          <div className="absolute inset-0 flex items-center justify-center font-[Orbitron] text-4xl font-extrabold text-stone-950/30 select-none">
-            {p.title
-              .split(" ")
-              .map((w) => w[0])
-              .join("")}
-          </div>
-
-          <div
-            className="absolute inset-0 opacity-20"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(250, 204, 21, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(250, 204, 21, 0.4) 1px, transparent 1px)",
-              backgroundSize: "20px 20px",
-            }}
-          />
-
-          <div className="relative z-10 flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-950/60 backdrop-blur-md border border-yellow-400/40 text-yellow-300 text-xs font-mono font-bold">
-            <FolderGit2 className="w-3.5 h-3.5 text-yellow-400" />
-            <span>FEATURED</span>
-          </div>
-        </div>
-
-        <h3 className="font-[Orbitron] text-2xl font-bold mb-3 text-foreground group-hover:text-yellow-300 transition-colors">
-          {p.title}
-        </h3>
-
-        <p className="text-muted-foreground mb-5 text-sm leading-relaxed">
-          {p.desc}
-        </p>
-
-        <div className="flex flex-wrap gap-2 mb-6">
-          {p.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-xs px-3 py-1 rounded-full bg-yellow-400/10 text-yellow-200 border border-yellow-400/25 font-medium"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <div className="flex gap-3 flex-wrap items-center">
-          {p.github && (
-            <a
-              href={p.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-full border border-yellow-400/35 bg-yellow-400/10 text-yellow-200 hover:bg-yellow-400/20 hover:border-yellow-400 hover:text-yellow-300 transition-all shadow-[0_0_12px_rgba(250,204,21,0.12)]"
-            >
-              <Github className="w-3.5 h-3.5" />
-              <span>GitHub</span>
-            </a>
-          )}
-
-          {p.demo && (
-            <a
-              href={p.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-full text-stone-950 bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 hover:from-yellow-200 hover:to-amber-400 shadow-[0_0_20px_rgba(250,204,21,0.4)] hover:shadow-[0_0_25px_rgba(250,204,21,0.6)] transition-all hover:scale-105"
-            >
-              <span>Live Demo</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-          )}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
+const secondaryProjects: Project[] = [
+  {
+    id: "lumora-ai",
+    name: "Lumora AI",
+    category: "AI Document Intelligence",
+    tagline: "Conversational PDF Retrieval via Google Gemini & RAG",
+    description:
+      "An AI-powered PDF assistant extracting structured text from uploaded documents and answering natural language questions with contextual citations using Google Gemini API and Apache PDFBox.",
+    technologies: ["Java", "Spring Boot", "React", "Gemini API", "Apache PDFBox"],
+    githubUrl: "https://github.com/Rishitha772/Lumora_AI",
+    highlights: [
+      "Document ingestion and chunking pipeline with Apache PDFBox",
+      "Generative Q&A responses powered by Google Gemini",
+      "Full-stack React client with markdown rendering",
+    ],
+    metrics: "Google Gemini API Powered",
+    icon: Bot,
+  },
+  {
+    id: "terravolt",
+    name: "TerraVolt",
+    category: "Sustainability Intelligence",
+    tagline: "Predictive Industrial Energy & Emissions Forecasting",
+    description:
+      "AI-driven platform that models and predicts industrial energy load patterns to optimize green consumption. Recognized as a Top 30 National project in the AICTE 1M1B Green Internship initiative.",
+    technologies: ["Python", "Machine Learning", "REST API", "Sustainability"],
+    githubUrl: "https://github.com/Rishitha772/TerraVolt",
+    liveUrl: "https://terra-volt-seven.vercel.app",
+    highlights: [
+      "Machine learning models forecasting power spikes and carbon output",
+      "National Top 30 recognition by AICTE and 1M1B Foundation",
+      "Interactive analytics dashboard deployed on Vercel",
+    ],
+    metrics: "AICTE Top 30 National Finalist",
+    icon: Zap,
+  },
+];
 
 export function Projects() {
-  return (
-    <section id="projects" className="relative py-32 px-6 overflow-hidden">
-      {/* Ambient warm golden radial lighting */}
-      <div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[750px] h-[750px] rounded-full pointer-events-none -z-10"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(250, 204, 21, 0.12) 0%, rgba(245, 158, 11, 0.05) 50%, transparent 70%)",
-          filter: "blur(90px)",
-        }}
-      />
-      <div
-        className="absolute bottom-10 left-10 w-96 h-96 rounded-full pointer-events-none -z-10"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(234, 179, 8, 0.10) 0%, transparent 70%)",
-          filter: "blur(70px)",
-        }}
-      />
+  const [showSecondary, setShowSecondary] = useState(false);
 
-      <div className="max-w-6xl mx-auto">
+  return (
+    <section
+      id="projects"
+      className="relative py-28 md:py-36 px-6 md:px-12 bg-[#351E2B] border-t border-[#624451]/60"
+    >
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6 }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-[#624451]/60"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-[0.25em] uppercase text-yellow-300 bg-yellow-400/10 border border-yellow-400/35 shadow-[0_0_20px_rgba(250,204,21,0.25)] mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-yellow-400 animate-pulse" />
-            <span>Selected Work</span>
+          <div>
+            <p className="font-mono text-xs tracking-[0.25em] text-[#B77983] uppercase mb-2">
+              04 / SELECTED WORKS
+            </p>
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#FAF5EF]">
+              Featured <span className="italic font-light text-[#E8D5C4]">Projects</span>
+            </h2>
           </div>
-
-          <h2 className="font-[Orbitron] text-4xl md:text-5xl font-extrabold tracking-tight">
-            Featured{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 drop-shadow-[0_0_35px_rgba(250,204,21,0.55)]">
-              Projects
-            </span>
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto mt-4 text-sm md:text-base">
-            Scalable backend architectures, AI chatbots, systems programming, and product case studies.
+          <p className="text-sm text-[#D5C0C3] max-w-md mt-3 md:mt-0 font-normal">
+            Real systems built with careful attention to architecture, clean abstractions, and backend reliability.
           </p>
         </motion.div>
 
-        <div
-          className="grid md:grid-cols-2 gap-8"
-          style={{ perspective: 1000 }}
-        >
-          {projects.map((p, i) => (
-            <TiltCard key={p.title} p={p} i={i} />
-          ))}
+        {/* Flagship Projects Showcase */}
+        <div className="space-y-12">
+          {flagshipProjects.map((p, index) => {
+            const Icon = p.icon;
+            const isReversed = index % 2 === 1;
+
+            return (
+              <Card3D key={p.id} maxTilt={4} className="rounded-2xl">
+                <motion.article
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="group rounded-2xl bg-[#432A37] border border-[#624451] hover:border-[#B77983] transition-all duration-300 overflow-hidden shadow-xl"
+                >
+                <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+                  {/* Left / Info Column (7 cols) */}
+                  <div
+                    className={`lg:col-span-7 p-8 md:p-10 flex flex-col justify-between ${
+                      isReversed ? "lg:order-2" : "lg:order-1"
+                    }`}
+                  >
+                    <div>
+                      {/* Category & Status Bar */}
+                      <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono text-xs text-[#B77983] tracking-wider uppercase">
+                            0{index + 1} // {p.category}
+                          </span>
+                        </div>
+                        {p.metrics && (
+                          <span className="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-[#351E2B] text-[#E8D5C4] border border-[#624451]">
+                            {p.metrics}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-normal text-[#FAF5EF] mb-2 group-hover:text-[#E8D5C4] transition-colors">
+                        {p.name}
+                      </h3>
+
+                      <p className="font-mono text-xs text-[#D5C0C3] mb-4 font-normal tracking-wide">
+                        {p.tagline}
+                      </p>
+
+                      <p className="text-sm md:text-base text-[#D5C0C3] leading-relaxed mb-6 font-normal">
+                        {p.description}
+                      </p>
+
+                      {/* Technical Highlights list */}
+                      <div className="space-y-2 mb-8 pt-4 border-t border-[#624451]/60">
+                        <p className="font-mono text-[11px] tracking-wider text-[#B77983] uppercase">
+                          ARCHITECTURAL HIGHLIGHTS
+                        </p>
+                        <ul className="space-y-1.5">
+                          {p.highlights.map((h, i) => (
+                            <li
+                              key={i}
+                              className="text-xs text-[#FAF5EF]/90 flex items-start gap-2"
+                            >
+                              <span className="inline-block w-1 h-1 rounded-full bg-[#E8D5C4] mt-1.5 flex-shrink-0" />
+                              <span>{h}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Tech Badges & Actions */}
+                    <div>
+                      {/* Tech stack pills */}
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {p.technologies.map((t) => (
+                          <span
+                            key={t}
+                            className="font-mono text-[11px] px-2.5 py-1 rounded bg-[#351E2B] text-[#E8D5C4] border border-[#624451]"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Action Links */}
+                      <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-[#624451]/60">
+                        {p.githubUrl && (
+                          <a
+                            href={p.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium tracking-wide border border-[#624451] bg-[#351E2B] text-[#FAF5EF] hover:border-[#B77983] hover:text-[#E8D5C4] transition-all"
+                          >
+                            <Github className="w-3.5 h-3.5 text-[#B77983]" />
+                            <span>Source Code</span>
+                          </a>
+                        )}
+
+                        {p.liveUrl && (
+                          <a
+                            href={p.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold tracking-wide bg-[#E8D5C4] text-[#351E2B] hover:bg-[#FAF5EF] transition-all"
+                          >
+                            <span>Live Demo</span>
+                            <ExternalLink className="w-3.5 h-3.5 text-[#351E2B]" />
+                          </a>
+                        )}
+
+                        {p.caseStudyUrl && (
+                          <a
+                            href={p.caseStudyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium tracking-wide border border-[#624451] bg-[#713B50]/30 text-[#FAF5EF] hover:border-[#B77983] hover:text-[#E8D5C4] transition-all"
+                          >
+                            <FileText className="w-3.5 h-3.5 text-[#B77983]" />
+                            <span>Case Study (PDF)</span>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right / Visual Blueprint Column (5 cols) */}
+                  <div
+                    className={`lg:col-span-5 bg-[#351E2B] p-8 md:p-10 flex flex-col justify-center border-t lg:border-t-0 ${
+                      isReversed
+                        ? "lg:border-r lg:border-[#624451] lg:order-1"
+                        : "lg:border-l lg:border-[#624451] lg:order-2"
+                    }`}
+                  >
+                    {/* Architectural Blueprint Card */}
+                    <div className="relative rounded-xl border border-[#624451] bg-[#432A37]/60 p-6 space-y-4">
+                      <div className="flex items-center justify-between pb-3 border-b border-[#624451]/60">
+                        <div className="flex items-center gap-2 text-xs font-mono text-[#D5C0C3]">
+                          <Icon className="w-4 h-4 text-[#E8D5C4]" />
+                          <span>SYSTEM ARCHITECTURE</span>
+                        </div>
+                        <span className="w-2 h-2 rounded-full bg-[#B77983]" />
+                      </div>
+
+                      {/* Schematic Code or Structural Representation */}
+                      <div className="font-mono text-[11px] text-[#D5C0C3] space-y-2 leading-relaxed bg-[#351E2B] p-4 rounded-lg border border-[#624451]">
+                        {p.id === "whatchat" && (
+                          <>
+                            <div className="text-[#B77983]">// REST + Real-Time Engine</div>
+                            <div>Client: React.js (Stateful Chat UI)</div>
+                            <div>Server: Spring Boot 3.x REST Controller</div>
+                            <div>Database: MySQL 8.0 (Normalized Relations)</div>
+                            <div className="text-[#E8D5C4]">Feature: Personal Memory Space Vault</div>
+                          </>
+                        )}
+                        {p.id === "hiresphere" && (
+                          <>
+                            <div className="text-[#B77983]">// Dual-Persona Workflows</div>
+                            <div>Candidate: Skill Sandbox & Task Runner</div>
+                            <div>Recruiter: Objective Assessment Metrics</div>
+                            <div>Auth: JWT Token Bearer Interceptor</div>
+                            <div className="text-[#E8D5C4]">Storage: MySQL Persistence Layer</div>
+                          </>
+                        )}
+                        {p.id === "in-memory-cache" && (
+                          <>
+                            <div className="text-[#B77983]">// Core Data Structures</div>
+                            <div>Store: HashMap&lt;K, Node&lt;K, V&gt;&gt;</div>
+                            <div>Eviction: DoublyLinkedList (Head/Tail O(1))</div>
+                            <div>Policy: Least Recently Used (LRU)</div>
+                            <div className="text-[#E8D5C4]">Cleaner: Daemon Thread with TTL Expiry</div>
+                          </>
+                        )}
+                      </div>
+
+                      <div className="pt-2 flex items-center justify-between text-[10px] font-mono text-[#B77983]">
+                        <span>RELIABLE • SCALABLE • CLEAN</span>
+                        <span>{p.technologies.slice(0, 2).join(" • ")}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.article>
+            </Card3D>
+          );
+        })}
         </div>
+
+        {/* Secondary Projects Section Toggle */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setShowSecondary(!showSecondary)}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-mono font-medium tracking-wider uppercase border border-[#624451] bg-[#432A37]/50 text-[#FAF5EF] hover:border-[#B77983] hover:text-[#E8D5C4] transition-all"
+          >
+            <span>
+              {showSecondary
+                ? "Hide Additional Projects"
+                : "Explore More Systems (Lumora AI & TerraVolt)"}
+            </span>
+            <span className="text-[#B77983]">{showSecondary ? "↑" : "↓"}</span>
+          </button>
+        </div>
+
+        {/* Secondary Projects Grid */}
+        {showSecondary && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.4 }}
+            className="grid md:grid-cols-2 gap-8 mt-10"
+          >
+            {secondaryProjects.map((p) => {
+              const Icon = p.icon;
+              return (
+                <div
+                  key={p.id}
+                  className="p-8 rounded-xl bg-[#432A37] border border-[#624451] hover:border-[#B77983] transition-all flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-mono text-xs text-[#B77983] uppercase tracking-wider">
+                        {p.category}
+                      </span>
+                      {p.metrics && (
+                        <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-[#351E2B] text-[#E8D5C4] border border-[#624451]">
+                          {p.metrics}
+                        </span>
+                      )}
+                    </div>
+
+                    <h4 className="font-serif text-2xl font-normal text-[#FAF5EF] mb-2">
+                      {p.name}
+                    </h4>
+
+                    <p className="text-xs text-[#D5C0C3] leading-relaxed mb-6">
+                      {p.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {p.technologies.map((t) => (
+                        <span
+                          key={t}
+                          className="font-mono text-[10px] px-2 py-0.5 rounded bg-[#351E2B] text-[#E8D5C4] border border-[#624451]"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 pt-4 border-t border-[#624451]">
+                    {p.githubUrl && (
+                      <a
+                        href={p.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono text-[#FAF5EF] hover:text-[#E8D5C4]"
+                      >
+                        <Github className="w-3.5 h-3.5 text-[#B77983]" />
+                        <span>GitHub</span>
+                      </a>
+                    )}
+                    {p.liveUrl && (
+                      <a
+                        href={p.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono text-[#E8D5C4] hover:text-[#FAF5EF]"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5 text-[#E8D5C4]" />
+                        <span>Live Demo</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </motion.div>
+        )}
       </div>
     </section>
   );

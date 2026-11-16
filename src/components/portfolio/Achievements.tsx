@@ -1,127 +1,113 @@
 import { motion } from "framer-motion";
-import { Sparkles, Trophy, Award, Medal, Star, Flame } from "lucide-react";
+import { Award, Flame, Medal, Star, Trophy } from "lucide-react";
+import { Card3D } from "./Scene3D";
 
-const items = [
+const achievements = [
   {
-    title: "AICTE 1M1B Green Internship — Top 30",
-    desc: "Developed TerraVolt — Selected as a Top 30 intern nationally and chosen for the prestigious Workplace Experience at Bangalore.",
+    number: "01",
+    title: "AICTE 1M1B Green Internship — Top 30 National",
+    desc: "Engineered TerraVolt for predictive industrial energy forecasting. Selected among the Top 30 interns nationwide and attended the exclusive Workplace Experience in Bangalore.",
     icon: Trophy,
-    highlight: "Top 30 National",
+    highlight: "National Honor",
   },
   {
-    title: "3 NPTEL Elite Certifications",
-    desc: "Earned Elite certifications in IoT, Industry 4.0 - IoT, and Technical English through NPTEL with distinction.",
+    number: "02",
+    title: "3x NPTEL Elite Silver Certifications",
+    desc: "Earned Elite Silver grade certifications across multiple IIT-administered examinations covering IoT Systems, Industry 4.0 Architecture, and Technical English.",
     icon: Medal,
-    highlight: "Elite Distinction",
+    highlight: "IIT Credentials",
   },
   {
-    title: "Internal Smart India Hackathon",
-    desc: "Participated in the Internal Smart India Hackathon, tackling real-world sustainability problem statements with TerraVolt.",
+    number: "03",
+    title: "Smart India Internal Hackathon Finalist",
+    desc: "Qualified for the Internal Smart India Hackathon finals by presenting practical software and data engineering approaches to solve sustainability bottlenecks.",
     icon: Flame,
     highlight: "Hackathon Finalist",
   },
   {
-    title: "Academic Excellence in ECE",
-    desc: "Consistently maintaining an exceptional academic record in Electronics and Communication Engineering at MRCEW.",
+    number: "04",
+    title: "Academic Excellence in ECE (8.5 CGPA)",
+    desc: "Consistently maintained top-tier academic standing across 7 semesters in Electronics & Communication Engineering at Malla Reddy College of Engineering for Women.",
     icon: Star,
-    highlight: "Top Academic Standing",
+    highlight: "Top Standing",
   },
   {
-    title: "Project Innovation Recognition",
-    desc: "Recognized at MRCEW Hyderabad for developing innovative engineering projects that address real-world community challenges.",
+    number: "05",
+    title: "Engineering Innovation Recognition",
+    desc: "Honored at MRCEW Hyderabad for end-to-end development of practical software solutions addressing real community and recruitment challenges.",
     icon: Award,
-    highlight: "Innovation Award",
+    highlight: "Campus Distinction",
   },
 ];
 
 export function Achievements() {
   return (
-    <section id="achievements" className="relative py-32 px-6 overflow-hidden">
-      {/* Ambient warm golden radial lighting */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none -z-10"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(250, 204, 21, 0.12) 0%, rgba(245, 158, 11, 0.05) 50%, transparent 70%)",
-          filter: "blur(90px)",
-        }}
-      />
-      <div
-        className="absolute bottom-10 right-10 w-96 h-96 rounded-full pointer-events-none -z-10"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(234, 179, 8, 0.10) 0%, transparent 70%)",
-          filter: "blur(70px)",
-        }}
-      />
-
-      <div className="max-w-6xl mx-auto">
+    <section
+      id="achievements"
+      className="relative py-28 md:py-36 px-6 md:px-12 bg-[#351E2B] border-t border-[#624451]/60"
+    >
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6 }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-[#624451]/60"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-[0.25em] uppercase text-yellow-300 bg-yellow-400/10 border border-yellow-400/35 shadow-[0_0_20px_rgba(250,204,21,0.25)] mb-4">
-            <Trophy className="w-3.5 h-3.5 text-yellow-400 animate-pulse" />
-            <span>Honors & Recognition</span>
+          <div>
+            <p className="font-mono text-xs tracking-[0.25em] text-[#B77983] uppercase mb-2">
+              05-B / HONORS & RECOGNITION
+            </p>
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#FAF5EF]">
+              Honors & <span className="italic font-light text-[#E8D5C4]">Distinctions</span>
+            </h2>
           </div>
-
-          <h2 className="font-[Orbitron] text-4xl md:text-5xl font-extrabold tracking-tight">
-            Key{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 drop-shadow-[0_0_35px_rgba(250,204,21,0.55)]">
-              Achievements
-            </span>
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto mt-4 text-sm md:text-base">
-            Milestones, national recognitions, and competitive project distinctions.
+          <p className="text-sm text-[#D5C0C3] max-w-md mt-3 md:mt-0 font-normal">
+            Competitive national recognitions, academic milestones, and verified industry credentials.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {items.map((it, i) => {
-            const Icon = it.icon;
+        {/* Achievements Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {achievements.map((item, index) => {
+            const Icon = item.icon;
             return (
-              <motion.div
-                key={it.title}
-                initial={{ opacity: 0, scale: 0.92 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className="relative rounded-3xl p-8 text-center overflow-hidden group border border-yellow-500/25 bg-gradient-to-b from-yellow-950/20 via-stone-900/75 to-yellow-950/35 backdrop-blur-xl shadow-[0_0_30px_rgba(250,204,21,0.12)] hover:border-yellow-400 hover:shadow-[0_0_40px_rgba(250,204,21,0.3)] transition-all duration-300"
-              >
-                {/* Glowing ambient hover background */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{
-                    background:
-                      "radial-gradient(circle at center, rgba(250, 204, 21, 0.15), transparent 70%)",
-                  }}
-                />
+              <Card3D key={item.title} maxTilt={6} className="h-full">
+                <motion.article
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                  className="group relative p-7 rounded-xl bg-[#432A37]/80 border border-[#624451] hover:border-[#B77983] transition-all duration-300 flex flex-col justify-between h-full"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="font-mono text-xs text-[#B77983] tracking-widest">
+                        {item.number}
+                      </span>
+                      <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-[#351E2B] text-[#E8D5C4] border border-[#624451]">
+                        {item.highlight}
+                      </span>
+                    </div>
 
-                <div className="relative z-10 flex flex-col items-center">
-                  <motion.div
-                    animate={{ rotate: [0, 8, -8, 0] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    className="w-20 h-20 mx-auto mb-5 rounded-full flex items-center justify-center shadow-[0_0_35px_rgba(250,204,21,0.5)] border-2 border-yellow-300/60 bg-gradient-to-tr from-yellow-400 via-amber-500 to-yellow-300"
-                  >
-                    <Icon className="w-10 h-10 text-stone-950" />
-                  </motion.div>
+                    <h3 className="font-serif text-xl font-medium text-[#FAF5EF] group-hover:text-[#E8D5C4] transition-colors mb-3">
+                      {item.title}
+                    </h3>
 
-                  <span className="inline-block text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-yellow-400/15 text-yellow-300 border border-yellow-400/35 mb-3 shadow-[0_0_10px_rgba(250,204,21,0.2)]">
-                    {it.highlight}
-                  </span>
+                    <p className="text-xs md:text-sm text-[#D5C0C3] leading-relaxed font-normal">
+                      {item.desc}
+                    </p>
+                  </div>
 
-                  <h3 className="font-[Orbitron] text-lg font-bold mb-3 text-foreground group-hover:text-yellow-300 transition-colors">
-                    {it.title}
-                  </h3>
-
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {it.desc}
-                  </p>
-                </div>
-              </motion.div>
+                  <div className="pt-4 mt-6 border-t border-[#624451]/50 flex items-center justify-between text-xs font-mono text-[#D5C0C3]">
+                    <span className="text-[#B77983] flex items-center gap-1.5">
+                      <Icon className="w-3.5 h-3.5 text-[#E8D5C4]" />
+                      <span>Verified Milestone</span>
+                    </span>
+                  </div>
+                </motion.article>
+              </Card3D>
             );
           })}
         </div>

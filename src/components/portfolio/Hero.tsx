@@ -1,151 +1,214 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { lazy, Suspense } from "react";
+import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
 import profileImg from "@/assets/rishitha.jpg";
-
-const Hero3DScene = lazy(() =>
-  import("./Scene3D").then((m) => ({ default: m.Hero3DScene })),
-);
-
-const roles = [
-  "Aspiring Software Engineer",
-  "AI Explorer",
-  "Product Management Enthusiast",
-  "Motivated Backend Developer",
-  ];
-
-function TypeRoles() {
-  const [idx, setIdx] = useState(0);
-  const [text, setText] = useState("");
-  const [del, setDel] = useState(false);
-
-  useEffect(() => {
-    const current = roles[idx];
-    const speed = del ? 40 : 80;
-    const t = setTimeout(() => {
-      if (!del && text === current) {
-        setTimeout(() => setDel(true), 1500);
-        return;
-      }
-      if (del && text === "") {
-        setDel(false);
-        setIdx((idx + 1) % roles.length);
-        return;
-      }
-      setText(del ? current.slice(0, text.length - 1) : current.slice(0, text.length + 1));
-    }, speed);
-    return () => clearTimeout(t);
-  }, [text, del, idx]);
-
-  return (
-    <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 font-semibold">
-      {text}
-      <span className="inline-block w-[2px] h-[1em] bg-yellow-400 ml-1 align-middle animate-pulse shadow-[0_0_8px_rgba(250,204,21,0.8)]" />
-    </span>
-  );
-}
+import { Hero3DGraphic, Card3D } from "./Scene3D";
 
 export function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20">
-      {/* Ambient warm golden radial lighting */}
-      <div className="absolute inset-0 -z-10" style={{ background: "var(--gradient-radial)" }} />
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-yellow-500/15 rounded-full blur-[120px] pointer-events-none -z-10" />
-      <div className="absolute top-1/2 right-1/4 w-[500px] h-[500px] bg-amber-500/15 rounded-full blur-[100px] pointer-events-none -z-10" />
+    <section
+      id="home"
+      className="relative min-h-[96vh] flex items-center justify-center pt-28 pb-16 px-4 sm:px-6 md:px-10 lg:px-12 bg-[#351E2B] overflow-hidden"
+    >
+      {/* Ambient background burgundy glow */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] rounded-full pointer-events-none -z-10 opacity-30"
+        style={{
+          background: "radial-gradient(circle, #713B50 0%, transparent 70%)",
+          filter: "blur(140px)",
+        }}
+      />
 
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center w-full">
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-6 relative z-10"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 border border-yellow-400/40 bg-yellow-400/10 backdrop-blur-md rounded-full px-4 py-1.5 text-xs shadow-[0_0_15px_rgba(250,204,21,0.25)]"
-          >
-            <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse shadow-[0_0_8px_rgba(250,204,21,0.8)]" />
-            <span className="text-yellow-200 font-medium">Available for opportunities</span>
-          </motion.div>
-          <h1 className="font-[Orbitron] text-5xl md:text-7xl font-extrabold leading-tight">
-            Hi, I'm{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-amber-500 drop-shadow-[0_0_35px_rgba(250,204,21,0.5)]">
-              Rishitha
-            </span>
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-amber-500 drop-shadow-[0_0_35px_rgba(250,204,21,0.5)]">
-              Khandesh
-            </span>
-          </h1>
-          <div className="text-xl md:text-2xl text-foreground/80 min-h-[2em]">
-            <TypeRoles />
+      {/* Main Container: Editorial Cream Canvas in the middle (Aureon inspiration) */}
+      <motion.div
+        initial={{ opacity: 0, y: 25, scale: 0.99 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-7xl w-full mx-auto rounded-3xl bg-[#F8F3EC] border border-[#624451]/40 shadow-[0_25px_70px_rgba(20,10,15,0.6)] overflow-hidden text-[#351E2B] relative"
+      >
+        {/* Top Minimal Editorial Header Ribbon */}
+        <div className="px-6 md:px-12 py-3.5 bg-[#351E2B] text-[#FAF5EF] flex items-center justify-between border-b border-[#624451]/60 text-[11px] font-mono tracking-widest uppercase">
+          <span className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#E8D5C4] animate-pulse" />
+            <span className="text-[#E8D5C4]">Rishitha Khandesh</span>
+            <span className="text-[#624451] hidden sm:inline">•</span>
+            <span className="text-[#D5C0C3] hidden sm:inline">Software Developer Portfolio</span>
+          </span>
+          <span className="text-[#E8D5C4]">EDITION 2026</span>
+        </div>
+
+        {/* Inner Cream Canvas Grid */}
+        <div className="p-6 sm:p-10 md:p-14 lg:p-16 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center relative">
+          {/* Subtle architectural background monogram watermark in cream */}
+          <div className="absolute right-8 top-1/2 -translate-y-1/2 select-none pointer-events-none opacity-[0.035] font-serif text-[380px] leading-none text-[#351E2B] hidden xl:block">
+            RK
           </div>
-          <p className="text-base text-foreground/85 max-w-xl leading-relaxed">
-            Final-year Electronics & Communication Engineering student. Curious, motivated, and always eager to learn, I enjoy exploring new ideas and turning them into meaningful experiences. I believe in continuous growth, embracing challenges, and using technology to create solutions that make a real difference.
-          </p>
-          <div className="flex flex-wrap gap-4 pt-2">
-            <motion.a
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.97 }}
-              href="#projects"
-              className="relative px-6 py-3 rounded-full font-bold text-stone-950 overflow-hidden shadow-[0_0_25px_rgba(250,204,21,0.5)] hover:shadow-[0_0_35px_rgba(250,204,21,0.7)] transition-all bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500"
-            >
-              View Projects
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.97 }}
-              href="/Rishitha_Khandesh_Portfolio_Resume.pdf"
-              className="px-6 py-3 rounded-full font-semibold border border-yellow-400/40 bg-yellow-400/10 backdrop-blur-md text-yellow-300 hover:bg-yellow-400/20 hover:border-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.15)] transition-all"
-            >
-              Download Resume
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.97 }}
-              href="#contact"
-              className="px-6 py-3 rounded-full font-semibold border border-yellow-400/30 bg-stone-900/60 backdrop-blur-md text-foreground hover:border-yellow-400 hover:text-yellow-300 transition-all"
-            >
-              Contact Me
-            </motion.a>
-          </div>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="relative h-[400px] md:h-[600px] flex items-center justify-center"
-        >
-          <div className="absolute inset-0">
-            <Suspense fallback={null}>
-              <Hero3DScene />
-            </Suspense>
-          </div>
-          <div
-            className="relative z-10 w-64 h-64 md:w-80 md:h-80 rounded-full p-1.5 shadow-[0_0_60px_rgba(250,204,21,0.5)] animate-glow-pulse-yellow"
-            style={{ background: "linear-gradient(135deg, #fde047, #facc15, #f59e0b)" }}
-          >
-            <div className="w-full h-full rounded-full overflow-hidden glass border-2 border-yellow-300/40">
-              <img
-                src={profileImg}
-                alt="Rishitha Khandesh portrait"
-                width={1024}
-                height={1024}
-                className="w-full h-full object-cover"
-              />
+
+          {/* Left Column: Editorial Headline, Tag & CTAs (7 cols) */}
+          <div className="lg:col-span-7 flex flex-col items-start space-y-7 z-10">
+            {/* Status / Availability Pill on Cream */}
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-[#DDCFBF] bg-[#FFFFFF] shadow-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#B77983] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#713B50]" />
+              </span>
+              <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#351E2B] font-medium">
+                Available for new opportunities
+              </span>
+            </div>
+
+            {/* Small Introduction */}
+            <div className="space-y-2">
+              <p className="font-mono text-xs md:text-sm tracking-[0.25em] text-[#713B50] uppercase font-semibold">
+                HELLO, I'M RISHITHA KHANDESH
+              </p>
+
+              {/* Main Headline in Deep Burgundy on Cream Canvas */}
+              <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-normal tracking-tight text-[#351E2B] leading-[1.06]">
+                Building Digital <br className="hidden sm:inline" />
+                <span className="italic font-light text-[#713B50]">
+                  Experiences
+                </span>{" "}
+                Through Code.
+              </h1>
+            </div>
+
+            {/* Supporting Description */}
+            <p className="text-base sm:text-lg text-[#624451] max-w-xl font-normal leading-relaxed">
+              I'm a Software Developer passionate about building reliable,
+              scalable, and meaningful software solutions. I enjoy transforming
+              ideas into practical applications using Java, backend technologies,
+              and modern web development.
+            </p>
+
+            {/* Action Buttons: Deep Burgundy button on Cream (Just like Aureon's 'DISCOVER COLLECTION ->') */}
+            <div className="flex flex-wrap items-center gap-4 pt-1">
+              <a
+                href="#projects"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#351E2B] text-[#FAF5EF] hover:bg-[#713B50] transition-all duration-300 shadow-md hover:shadow-[0_6px_20px_rgba(53,30,43,0.3)] hover:-translate-y-0.5"
+              >
+                <span>View My Work</span>
+                <ArrowRight className="w-4 h-4 text-[#E8D5C4]" />
+              </a>
+
+              <a
+                href="/Rishitha_Khandesh_SDE_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full text-xs font-semibold tracking-wider uppercase border border-[#624451]/60 bg-[#FFFFFF] text-[#351E2B] hover:border-[#351E2B] hover:bg-[#FAF5EF] transition-all duration-300 hover:-translate-y-0.5 shadow-sm"
+              >
+                <Download className="w-4 h-4 text-[#713B50]" />
+                <span>Download Resume</span>
+              </a>
+            </div>
+
+            {/* Social Links on Cream Canvas */}
+            <div className="pt-4 flex flex-wrap items-center gap-6 border-t border-[#DDCFBF] w-full">
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://github.com/Rishitha772"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub Profile"
+                  className="w-10 h-10 rounded-full border border-[#DDCFBF] bg-[#FFFFFF] flex items-center justify-center text-[#351E2B] hover:text-[#FAF5EF] hover:border-[#351E2B] hover:bg-[#351E2B] transition-all duration-200 shadow-sm"
+                >
+                  <Github className="w-4 h-4" />
+                </a>
+
+                <a
+                  href="https://www.linkedin.com/in/rishitha-khandesh-b766b330a/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn Profile"
+                  className="w-10 h-10 rounded-full border border-[#DDCFBF] bg-[#FFFFFF] flex items-center justify-center text-[#351E2B] hover:text-[#FAF5EF] hover:border-[#351E2B] hover:bg-[#351E2B] transition-all duration-200 shadow-sm"
+                >
+                  <Linkedin className="w-4 h-4" />
+                </a>
+
+                <a
+                  href="mailto:rishithakhandesh@gmail.com"
+                  aria-label="Email Contact"
+                  className="w-10 h-10 rounded-full border border-[#DDCFBF] bg-[#FFFFFF] flex items-center justify-center text-[#351E2B] hover:text-[#FAF5EF] hover:border-[#351E2B] hover:bg-[#351E2B] transition-all duration-200 shadow-sm"
+                >
+                  <Mail className="w-4 h-4" />
+                </a>
+              </div>
+
+              <div className="h-4 w-[1px] bg-[#DDCFBF] hidden sm:block" />
+
+              <div className="font-mono text-xs text-[#713B50] flex items-center gap-2">
+                <span className="font-medium">HYDERABAD, INDIA</span>
+                <span>•</span>
+                <span className="text-[#351E2B] font-semibold">JAVA & BACKEND ARCHITECTURE</span>
+              </div>
             </div>
           </div>
-        </motion.div>
-      </div>
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-yellow-300/80 text-xs flex flex-col items-center gap-2 font-mono"
-      >
-        <span>SCROLL</span>
-        <div className="w-px h-12 bg-gradient-to-b from-yellow-400 via-amber-400 to-transparent" />
+
+          {/* Right Column: Portrait in Refined Architectural Frame (5 cols) */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end z-10">
+            <div className="relative w-full max-w-sm sm:max-w-md">
+              {/* Interactive 3D Floating Geometry */}
+              <div className="absolute -top-14 -right-10 w-32 h-32 sm:w-40 sm:h-40 z-20 pointer-events-none drop-shadow-2xl hidden sm:block">
+                <Hero3DGraphic className="w-full h-full" />
+              </div>
+
+              {/* Outer Frame with 3D Perspective Tilt */}
+              <Card3D maxTilt={7}>
+                <div className="relative p-3.5 rounded-2xl border border-[#DDCFBF] bg-[#FFFFFF] shadow-xl">
+                  {/* Corner Accents in Deep Burgundy */}
+                  <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-[#351E2B]" />
+                  <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-[#351E2B]" />
+                  <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-[#351E2B]" />
+                  <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-[#351E2B]" />
+
+                  {/* Portrait */}
+                  <div className="relative overflow-hidden rounded-xl aspect-[4/5] bg-[#351E2B]">
+                    <img
+                      src={profileImg}
+                      alt="Rishitha Khandesh"
+                      className="w-full h-full object-cover object-top filter contrast-[1.04] brightness-[0.98] transition-transform duration-700 hover:scale-105"
+                    />
+
+                    {/* Subtle lower gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#351E2B] via-transparent to-transparent opacity-85" />
+
+                    {/* Overlay Metadata Tag */}
+                    <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-lg bg-[#351E2B]/90 backdrop-blur-md border border-[#624451] text-[#FAF5EF]">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-serif text-sm font-medium text-[#FAF5EF]">
+                            Rishitha Khandesh
+                          </p>
+                          <p className="font-mono text-[10px] tracking-wider text-[#E8D5C4] uppercase">
+                            B.Tech ECE • MRCEW (8.6 CGPA)
+                          </p>
+                        </div>
+                        <span className="font-mono text-xs text-[#FAF5EF] px-2 py-0.5 rounded border border-[#624451] bg-[#432A37]">
+                          Java / Cloud
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Lower Frame Note */}
+                  <div className="mt-3 pt-2.5 border-t border-[#DDCFBF] flex items-center justify-between text-[11px] font-mono text-[#624451] px-1">
+                    <span className="flex items-center gap-1.5 font-medium">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#713B50]" />
+                      <span>3+ Flagship Systems</span>
+                    </span>
+                    <span className="text-[#351E2B] font-semibold">ENGINEERING EXCELLENCE</span>
+                  </div>
+                </div>
+              </Card3D>
+            </div>
+          </div>
+        </div>
+
+        {/* Lower Canvas Bar: Pagination & Metadata */}
+        <div className="px-6 md:px-12 py-3 bg-[#FAF5EF] border-t border-[#DDCFBF] flex items-center justify-between text-xs font-mono text-[#624451]">
+          <span className="font-semibold text-[#351E2B]">01 —— INTRODUCTION</span>
+          <span className="hidden sm:inline text-[#713B50]">TIMELESS BY DESIGN • MINIMAL & TECHNICAL</span>
+          <span className="font-semibold text-[#351E2B]">06 —— ARCHIVE</span>
+        </div>
       </motion.div>
     </section>
   );
